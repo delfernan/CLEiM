@@ -1,0 +1,12 @@
+diseaseen.lst:Freebase:disease:en
+symptomen.lst:Freebase:symptom:en
+treatmenten.lst:Freebase:treatment:en
+mlpen.lst:MedlinePlus:medlineplus:en
+sctcoreen.lst:Snomed:snomed:en
+diseasesp.lst:Freebase:disease:sp
+symptomsp.lst:Freebase:symptom:sp
+treatmentsp.lst:Freebase:treatment:sp
+mlpsp.lst:MedlinePlus:medlineplus:sp
+sctcoresp.lst:Snomed:snomed:sp
+dbpediaen.lst:DBPedia:dbpedia:en
+dbpediasp.lst:DBPedia:dbpedia:sp

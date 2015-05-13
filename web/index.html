@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>CLEiM: Cross Lingual Education in Medicine</title>
+        <link rel="stylesheet" type="text/css" href="themes/base/ui.all.css">
+        <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#txClinical").resizable({
+                    handles: "se"
+                });
+
+                $("form#submit").submit(function() {
+                    $('#output').html("LOADING...");
+                    $.ajaxSetup({scriptCharset: "utf-8", contentType: "application/x-www-form-urlencoded; charset=UTF-8"});
+                    $.ajax({
+                        url: "NLPServ",
+                        type: "POST",
+                        scriptCharset: "utf-8",
+                        data: {"text": $('#txClinical').val(), "src": $('#src').val()},
+                        success: function(html) {
+                            $('#output').html(html);
+                        }
+                    });
+                    return false;
+                });
+
+            });
+        </script>
+        <style type="text/css">
+            .ui-resizable-se {bottom: 17px;}
+            body{ font: 70% "Trebuchet MS", sans-serif;}
+        </style>
+    </head>
+    <body>
+        <a href='service.html' style="float:right;margin-left:10px;">Service XML</a>
+        <a href='admin.html' style="float:right;">Admin</a>
+        <form method=POST id="submit" action="NLPServ" target=output>
+            <!-- <form method=POST id="submit" action="TMTServ" target=output>-->
+            <h2>CLEiM. A Cross Lingual Intelligent System for Education in Medicine</h2>
+            <!-- <h2></h2> -->
+            <table width="100%" height="100%">
+                <tr><td colspan="2">
+                        <label style="font-size: 1.2em;"> Annotate with Ontologies: </label>
+                        <select class="ui-widget ui-state-default ui-corner-all" name="src" id="src">
+                            <option value=1>LOCAL</option>
+                            <option value=2>REMOTE MEDLINEPLUS</option>
+                            <option value=3>REMOTE SNOMED</option>
+                            <option value=4>REMOTE DBPEDIA</option>
+                            <option value=0>REMOTE ALL</option>
+                            <option value=-1>ALL (LOCAL & REMOTE)</option>
+                        </select>
+                        <button type=submit id="bSearch" style="font-size: 1.2em;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                            PROCESS TEXT
+                        </button>
+                    </td></tr>
+                <tr>
+                    <td valign="top">
+                        <textarea name="text" id="txClinical" style="font-size: 1.5em;" rows="30" cols="55"></textarea>
+                    </td>
+                    <td valign="top" width="100%">
+                        <!-- <iframe name="output" id="output" height="500" width="100%"></iframe> -->  
+                        <div id="output"></div>
+                    </td> 
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

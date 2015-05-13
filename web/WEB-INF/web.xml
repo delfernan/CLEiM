@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>CLEiM</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>NLPServ</display-name>
+    <servlet-name>NLPServ</servlet-name>
+    <servlet-class>com.uem.gsi.cleim.ali.NLPServ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NLPServ</servlet-name>
+    <url-pattern>/NLPServ</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>XMLServ</display-name>
+    <servlet-name>XMLServ</servlet-name>
+    <servlet-class>com.uem.gsi.cleim.ali.XMLServ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>XMLServ</servlet-name>
+    <url-pattern>/XMLServ</url-pattern>
+  </servlet-mapping>
+</web-app>

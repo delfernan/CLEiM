@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>CLEiM Web Service Client</title>
+        <link rel="stylesheet" type="text/css" href="themes/base/ui.all.css">
+        <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/fontReSizer.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#txClinical").resizable({
+                    handles: "se"
+                });
+                $(".cksrcall").click(function(event) {
+                    if ($(this).is(":checked")) {
+                        $(".cksrc:checkbox:not(:checked)").attr("checked", "checked");
+                    } else {
+                        $(".cksrc:checkbox:checked").removeAttr("checked");
+                    }
+                });
+                $(".cklanall").click(function(event) {
+                    if ($(this).is(":checked")) {
+                        $(".cklan:checkbox:not(:checked)").attr("checked", "checked");
+                    } else {
+                        $(".cklan:checkbox:checked").removeAttr("checked");
+                    }
+                });
+
+                $('#show_hide_opt').click(function() {
+                    $("#localopt").slideToggle();
+                });
+            });
+        </script>
+        <style type="text/css">
+            .ui-resizable-se {bottom: 17px;}
+            body{ font: 70% "Trebuchet MS", sans-serif;margin-top:0;}
+        </style>
+    </head>
+    <body>
+        <a href='admin.html' style="float:right;margin-left:10px;">Admin</a>
+        <a href='index.html' style="float:right;">Home</a>
+        <div id="cambiarTamanyo">
+        </div>
+        <form method=POST id="submit" action="XMLServ" target=output>
+            <h2>CLEiM. Web Service Client</h2>
+            <table width="100%" height="100%">
+                <tr><td colspan="2">
+                        <label style="font-size: 1.2em;"> Annotate with Ontologies: </label>
+                        <select class="ui-widget ui-state-default ui-corner-all" name="src" id="src">
+                            <option value=1>LOCAL</option>
+                            <option value=2>REMOTE MEDLINEPLUS</option>
+                            <option value=3>REMOTE SNOMED</option>
+                            <option value=4>REMOTE DBPEDIA</option>
+                            <option value=0>REMOTE ALL</option>
+                            <option value=-1>ALL (LOCAL & REMOTE)</option>
+                        </select>
+                        <label style="font-size: 1.2em;"> Annotation Depth: </label>
+                        <select class="ui-widget ui-state-default ui-corner-all" name="lev" id="lev">
+                            <option value=0>0(Direct)</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                        </select>
+                        <label style="font-size: 1.2em;"> Remote ontologies: </label>
+                        <input class="ui-widget ui-state-default ui-corner-all" name="onts" id="onts" value="40397,46116"/>
+                        <button type=submit id="bSearch" style="font-size: 1.2em;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                            PROCESS TEXT
+                        </button>
+                    </td></tr>
+                <tr>
+                    <td valign="top">
+                        <div id="localopt" name="localopt">
+                            <p>
+                                <label style="font-size: 1.2em;"> Select local sources: </label>
+                                <input type="checkbox" class="cksrcall" name="cksrcall" id="cksrcall" checked>All</input>
+                            </p>
+                            <table>
+                                <tr>
+                                    <td><input type="checkbox" class="cksrc" name="cksrcfb" id="cksrcfb" value="Freebase" checked>Freebase</input></td>
+                                    <td><input type="checkbox" class="cksrc" name="cksrcmp" id="cksrcmp" value="MedlinePlus" checked>MedlinePlus</input></td>
+                                    <td><input type="checkbox" class="cksrc" name="cksrcss" id="cksrcss" value="SnomedCore" checked>Snomed CORE</input></td>
+                                    <td><input type="checkbox" class="cksrc" name="cksrcsc" id="cksrcsc" value="Snomed" checked>Snomed CT</input></td>
+                                    <td><input type="checkbox" class="cksrc" name="cksrcdb" id="cksrcdb" value="DBPedia" checked>DBPedia</input></td>
+                                </tr>
+                            </table>
+                            <p>
+                                <label style="font-size: 1.2em;"> Select local language: </label>
+                                <input type="checkbox" class="cklanall" name="cklanall" id="cklanall" checked>All</input>
+                            </p>
+                            <table>
+                                <tr>
+                                    <td><input type="checkbox" class="cklan" name="cklanen" id="cklanen" value="en" checked>English (en)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklansp" id="cklansp" value="sp" checked>Spanish (sp)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanfr" id="cklanfr" value="fr" checked>French (fr)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklansv" id="cklansv" value="sv" checked>Swedish (sv)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanpt" id="cklanpt" value="pt" checked>Portuguese (pt)</input></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="cklan" name="cklanit" id="cklanit" value="it" checked>Italian (it)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklande" id="cklande" value="de" checked>German (de)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklannl" id="cklannl" value="nl" checked>Dutch (nl)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanzh" id="cklanzh" value="zh" checked>Chinese (zh)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanru" id="cklanru" value="ru" checked>Russian (ru)</input></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="cklan" name="cklanja" id="cklanja" value="ja" checked>Japanese (ja)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanpl" id="cklanpl" value="pl" checked>Polish (pl)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanda" id="cklanda" value="da" checked>Danish (da)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanar" id="cklanar" value="ar" checked>Arabic (ar)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklancs" id="cklancs" value="cs" checked>Czech (cs)</input></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="cklan" name="cklanfi" id="cklanfi" value="fi" checked>Finnish (fi)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanhe" id="cklanhe" value="he" checked>Hebrew (he)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanhi" id="cklanhi" value="hi" checked>Hindi (hi)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklannb" id="cklannb" value="nb" checked>Norwegian (nb)</input></td>
+                                    <td><input type="checkbox" class="cklan" name="cklanel" id="cklanel" value="el" checked>Greek (el)</input></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <a href="#" id="show_hide_opt" name="show_hide_opt">show/hide local options</a>
+                        <textarea name="text" id="txClinical" style="font-size: 1.5em;" rows="30" cols="60"></textarea>
+                    </td>
+                    <td valign="top" width="100%">
+                        <iframe name="output" id="output" height="600" width="100%"></iframe>
+                    </td> 
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
