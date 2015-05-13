@@ -7,3 +7,7 @@ The installation is simple, you can use it as a Web application. It has been tes
 The original system has been successfully used to carry out active learning activities with medical students. However, it could be interesting in much more knowledge fields.
 
 More info also in sourceforge: http://cleim.sourceforge.net/
+
+
+# LICENSE GPL v3
+http://www.gnu.org/copyleft/gpl.html
