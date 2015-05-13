@@ -5,3 +5,5 @@ CLEiM (Cross Lingual Education in Medicine) is an opensource version of an Intel
 We do NER (Named Entity Recognition) based on GATE platform.
 The installation is simple, you can use it as a Web application. It has been tested under apache-tomcat.
 The original system has been successfully used to carry out active learning activities with medical students. However, it could be interesting in much more knowledge fields.
+
+More info also in sourceforge: http://cleim.sourceforge.net/
